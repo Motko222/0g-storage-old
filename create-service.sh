@@ -7,8 +7,8 @@ After=network.target
 StartLimitIntervalSec=0
 [Service]
 User=root
-WorkingDirectory=$HOME/0g-storage-node/run
-ExecStart=/root/0g-storage-node/target/release/zgs_node --config /root/0g-storage-node/run/config.toml
+WorkingDirectory=/root/0g-storage-node/run
+ExecStart=/root/0g-storage-node/target/release/zgs_node --config config.toml
 Restart=always
 RestartSec=30
 [Install]
