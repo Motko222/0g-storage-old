@@ -33,5 +33,3 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable 0g-storage
 sudo systemctl enable 0g-storage-kv
-
-echo "Service created, start with start-service.sh"
