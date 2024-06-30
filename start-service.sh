@@ -1,6 +1,4 @@
 #!/bin/bash
  
 sudo systemctl restart 0g-storage
-
-echo "Service started (CTRL-C to close logs)"
-sudo journalctl -u 0g-storage -f --no-hostname -o cat
+tail -n 100 -f $(find ~/0g-storage-node/run/log -type f -exec ls -t1 {} + | head -1)
