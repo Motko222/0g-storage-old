@@ -3,8 +3,8 @@
 source ~/scripts/0gchain/cfg
 
 #get RPC addresses
-node_rpc=$(cat ~/0g-storage-node/run/config.toml | grep "rpc_listen_address" | awk '{print $3}' | sed 's/"//g')
-chain_rpc=$(cat ~/0g-storage-node/run/config.toml | grep "blockchain_rpc_endpoint" | awk '{print $3}' | sed 's/"//g')
+node_rpc=$(cat ~/0g-storage-node/run/config.toml | grep "rpc_listen_address" | tail -1 | awk '{print $3}' | sed 's/"//g')
+chain_rpc=$(cat ~/0g-storage-node/run/config.toml | grep "blockchain_rpc_endpoint" | tail -1 | awk '{print $3}' | sed 's/"//g')
 
 #get version
 cd ~/0g-storage-node/target/release
