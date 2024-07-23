@@ -6,6 +6,7 @@ source ~/.bash_profile
 #get RPC addresses
 node_rpc=$(cat ~/0g-storage-node/run/config.toml | grep "rpc_listen_address =" | tail -1 | awk '{print $3}' | sed 's/"//g')
 chain_rpc=$(cat ~/0g-storage-node/run/config.toml | grep "blockchain_rpc_endpoint =" | tail -1 | awk '{print $3}' | sed 's/"//g')
+kv_roc=$(cat ~/0g-storage-kv/run/config.toml | grep "rpc_listen_address =" | tail -1 | awk '{print $3}' | sed 's/"//g')
 
 #get version
 cd ~/0g-storage-node/target/release
@@ -30,6 +31,7 @@ cat << EOF
   "node peers":"$peers",
   "chain rpc":"$chain_rpc",
   "chain height":"$chain_height"
+  "kv rpc":"$kv_rpc"
 }
 EOF
 
