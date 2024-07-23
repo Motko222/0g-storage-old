@@ -26,10 +26,10 @@ cat << EOF
   "machine":"$MACHINE",
   "node rpc":"$node_rpc",
   "node version":"$node_version",
-  "node height":$node_height,
+  "node height":"$node_height",
   "node peers":"$peers",
   "chain rpc":"$chain_rpc",
-  "chain height":$chain_height
+  "chain height":"$chain_height"
 }
 EOF
 
