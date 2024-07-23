@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source ~/scripts/0gchain/cfg
+source ~/scripts/0G-chain/cfg
+source ~/.bash_profile
 
 #get RPC addresses
 node_rpc=$(cat ~/0g-storage-node/run/config.toml | grep "rpc_listen_address =" | tail -1 | awk '{print $3}' | sed 's/"//g')
@@ -8,7 +9,7 @@ chain_rpc=$(cat ~/0g-storage-node/run/config.toml | grep "blockchain_rpc_endpoin
 
 #get version
 cd ~/0g-storage-node/target/release
-zgs_version=$(./zgs_node --version | awk '{print $2}')
+node_version=$(./zgs_node --version | awk '{print $2}')
 
 #get storage node info
 json=$(curl -sX POST $node_rpc -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"zgs_getStatus","params":[],"id":1}')
@@ -24,7 +25,7 @@ cat << EOF
   "id":"$ID",
   "machine":"$MACHINE",
   "node rpc":"$node_rpc",
-  "node version":"$version",
+  "node version":"$node_version",
   "node height":$node_height,
   "node peers":"$peers",
   "chain rpc":"$chain_rpc",
