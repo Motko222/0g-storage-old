@@ -24,3 +24,8 @@ git clone -b v1.1.0-testnet https://github.com/0glabs/0g-storage-kv.git
 cd 0g-storage-node
 git submodule update --init
 cargo build --release
+
+cd ~
+git clone https://github.com/0glabs/0g-storage-client.git
+cd 0g-storage-client
+go build
