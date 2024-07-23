@@ -1,0 +1,34 @@
+#!/bin/bash
+
+source ~/scripts/0gchain/cfg
+
+#get RPC addresses
+node_rpc=$(cat ~/0g-storage-node/run/config.toml | grep "rpc_listen_address" | awk '{print $3}' | sed 's/"//g')
+chain_rpc=$(cat ~/0g-storage-node/run/config.toml | grep "blockchain_rpc_endpoint" | awk '{print $3}' | sed 's/"//g')
+
+#get version
+cd ~/0g-storage-node/target/release
+zgs_version=$(./zgs_node --version | awk '{print $2}')
+
+#get storage node info
+json=$(curl -sX POST $node_rpc -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"zgs_getStatus","params":[],"id":1}'  | jq .result.logSyncHeight)
+node_height=$(echo $json | jq .result.logSyncHeight)
+peers=$(echo $json | jq .result.connectedPeers)
+
+#get chain info
+chain_height=$((16#$(curl -s -X POST $chain_rpc  -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r  .result | sed 's/0x//g')))
+
+cat << EOF
+{
+  "updated":"$(date --utc +%FT%TZ)",
+  "id":"$ID",
+  "machine":"$MACHINE",
+  "node rpc":"$node_rpc",
+  "node version":"$version",
+  "node height":$node_height,
+  "node peers":"$peers",
+  "chain rpc":"$chain_rpc",
+  "chain height":$chain_height
+}
+EOF
+
