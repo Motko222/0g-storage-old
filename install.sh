@@ -14,7 +14,7 @@ sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.0.linux-amd64.ta
 export PATH=$PATH:/usr/local/go/bin
 
 cd ~
-git clone -b v0.3.2 https://github.com/0glabs/0g-storage-node.git
+git clone -b v0.3.3 https://github.com/0glabs/0g-storage-node.git
 cd 0g-storage-node
 git submodule update --init
 cargo build --release
