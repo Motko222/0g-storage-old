@@ -11,9 +11,9 @@ cd ~/0g-storage-node/target/release
 zgs_version=$(./zgs_node --version | awk '{print $2}')
 
 #get storage node info
-json=$(curl -sX POST $node_rpc -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"zgs_getStatus","params":[],"id":1}'  | jq .result.logSyncHeight)
-node_height=$(echo $json | jq .result.logSyncHeight)
-peers=$(echo $json | jq .result.connectedPeers)
+json=$(curl -sX POST $node_rpc -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"zgs_getStatus","params":[],"id":1}')
+node_height=$(echo $json | jq -r .result.logSyncHeight)
+peers=$(echo $json | jq -r .result.connectedPeers)
 
 #get chain info
 chain_height=$((16#$(curl -s -X POST $chain_rpc  -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r  .result | sed 's/0x//g')))
