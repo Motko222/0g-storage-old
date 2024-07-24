@@ -7,6 +7,7 @@ source ~/.bash_profile
 group=na
 network=testnet
 chain=newton
+id=$ID
 
 #get folder size
 folder_size=$(du -hs -L ~/0g-storage-node | awk '{print $1}')
