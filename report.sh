@@ -59,7 +59,7 @@ then
   --header "Content-Type: text/plain; charset=utf-8" \
   --header "Accept: application/json" \
   --data-binary "
-    report,machine=$MACHINE,id=$id,grp=$group status=\"$status\",message=\"$message\",version=\"$version\",url=\"$url\",chain=\"$chain\",node_height=\"$node_height\" $(date +%s%N) 
+    report,machine=$MACHINE,id=$id,grp=$group status=\"$status\",message=\"$message\",version=\"$version\",url=\"$url\",chain=\"$chain\",node_height=\"$node_height\",kv_result=\"$kv_result\" $(date +%s%N) 
     "
 fi
 
