@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ~/scripts/0G-chain/cfg
+source ~/scripts/0g-chain/cfg
 source ~/.bash_profile
 
 #get folder size
