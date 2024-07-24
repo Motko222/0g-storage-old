@@ -3,6 +3,11 @@
 source ~/scripts/0g-chain/cfg
 source ~/.bash_profile
 
+#generic
+group=na
+network=testnet
+chain=newton
+
 #get folder size
 folder_size=$(du -hs -L ~/0g-storage-node | awk '{print $1}')
 
@@ -43,4 +48,17 @@ cat << EOF
   "kv_version":"$kv_version"
 }
 EOF
+
+# send data to influxdb
+if [ ! -z $INFLUX_HOST ]
+then
+ curl --request POST \
+ "$INFLUX_HOST/api/v2/write?org=$INFLUX_ORG&bucket=$INFLUX_BUCKET&precision=ns" \
+  --header "Authorization: Token $INFLUX_TOKEN" \
+  --header "Content-Type: text/plain; charset=utf-8" \
+  --header "Accept: application/json" \
+  --data-binary "
+    report,machine=$MACHINE,id=$id,grp=$group status=\"$status\",message=\"$message\",version=\"$version\",url=\"$url\",chain=\"$chain\",node_height=\"$node_height\" $(date +%s%N) 
+    "
+fi
 
