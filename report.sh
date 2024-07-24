@@ -3,6 +3,9 @@
 source ~/scripts/0G-chain/cfg
 source ~/.bash_profile
 
+#get folder size
+folder_size=$(du -hs ~/0g-storage-node | awk '{print $1}')
+
 #get RPC addresses
 node_rpc=$(cat ~/0g-storage-node/run/config.toml | grep '^rpc_listen_address =' | tail -1 | awk '{print $3}' | sed 's/"//g')
 chain_rpc=$(cat ~/0g-storage-node/run/config.toml | grep '^blockchain_rpc_endpoint =' | tail -1 | awk '{print $3}' | sed 's/"//g')
@@ -25,6 +28,7 @@ cat << EOF
   "updated":"$(date --utc +%FT%TZ)",
   "id":"$ID",
   "machine":"$MACHINE",
+  "folder_size":"$folder_size",
   "node rpc":"$node_rpc",
   "node version":"$node_version",
   "node height":"$node_height",
