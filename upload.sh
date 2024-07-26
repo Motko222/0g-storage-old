@@ -6,7 +6,7 @@ contract=0x8873cc79c5b3b5666535C825205C9a128B1D75F1
 source ~/scripts/0g-chain/cfg
 source ~/.bash_profile
 
-read -p "Key? (main) " key
+read -p "Key? ($KEY) " key
 [ -z $key ] && key=$KEY
 
 pk=$({ echo y; sleep 1; echo $PASS; } |  $BINARY keys unsafe-export-eth-key $key)
