@@ -32,8 +32,6 @@ cd ~
 rm -r 0g-storage-node
 git clone -b v0.3.4 https://github.com/0glabs/0g-storage-node.git
 cd 0g-storage-node
-git fetch --all --tags
-git checkout 7d73ccd
 git submodule update --init
 cargo build --release
 
