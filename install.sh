@@ -17,29 +17,30 @@ sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.5.linux-amd64.ta
 export PATH=$PATH:/usr/local/go/bin
 
 #backup config files
-[ -d ~/backup ] mkdir ~/backup
-[ -d ~/backup/0g-storage-kv ] mkdir ~/backup/0g-storage-kv
-[ -d ~/backup/0g-storage-node ] mkdir ~/backup/0g-storage-node
+[ -d ~/backup ] && mkdir ~/backup
+[ -d ~/backup/0g-storage-kv ] && mkdir ~/backup/0g-storage-kv
+[ -d ~/backup/0g-storage-node ] && mkdir ~/backup/0g-storage-node
 cp ~/0g-storage-node/run/config.toml ~/backup/0g-storage-node/config.toml
 cp ~/0g-storage-node/run/log_config ~/backup/0g-storage-node/log_config
 cp ~/0g-storage-kv/run/config.toml ~/backup/0g-storage-kv/config.toml
 cp ~/0g-storage-kv/run/log_config ~/backup/0g-storage-kv/log_config
 
 cd ~
-rm 0g-storage-node
+rm -r 0g-storage-node
 git clone -b v0.3.4 https://github.com/0glabs/0g-storage-node.git
 cd 0g-storage-node
 git submodule update --init
 cargo build --release
 
 cd ~
-rm 0g-storage-kv
+rm -r 0g-storage-kv
 git clone -b v1.1.0-testnet https://github.com/0glabs/0g-storage-kv.git
 cd 0g-storage-kv
 git submodule update --init
 cargo build --release
 
 cd ~
+rm -r 0g-storage-client
 git clone https://github.com/0glabs/0g-storage-client.git
 cd 0g-storage-client
 go build
