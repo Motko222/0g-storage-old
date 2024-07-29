@@ -2,7 +2,8 @@
 
 read -p "Sure? " yn
 case $yn in
- n|N|no|No|NO) exit ;;
+ y|Y|yes|Yes|YES) ;;
+ *) exit ;;
 esac
 
 #update
