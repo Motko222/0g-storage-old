@@ -1,10 +1,6 @@
 #!/bin/bash
 
-read -p "Sure? " yn
-case $yn in
- y|Y|yes|Yes|YES) ;;
- *) exit ;;
-esac
+read -p "Tag ? (https://github.com/0glabs/0g-storage-node/releases) " tag
 
 #backup config files
 [ -d ~/backup ] || mkdir ~/backup
@@ -12,6 +8,7 @@ esac
 cp ~/0g-storage-node/run/config.toml ~/backup/0g-storage-node/config.toml
 cp ~/0g-storage-node/run/log_config ~/backup/0g-storage-node/log_config
 
+#deploy
 cd ~
 rm -r 0g-storage-node
 read -p "Tag ? (https://github.com/0glabs/0g-storage-node.git) " tag
