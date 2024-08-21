@@ -11,7 +11,6 @@ cp ~/0g-storage-node/run/log_config ~/backup/0g-storage-node/log_config
 #deploy
 cd ~
 rm -r 0g-storage-node
-read -p "Tag ? (https://github.com/0glabs/0g-storage-node.git) " tag
 git clone -b $tag https://github.com/0glabs/0g-storage-node.git
 cd 0g-storage-node
 git submodule update --init
