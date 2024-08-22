@@ -32,6 +32,8 @@ kv_version=$(./zgs_kv --version | awk '{print $2}')
 #get chain info
 chain_height=$((16#$(curl -s -X POST $chain_rpc  -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r  .result | sed 's/0x//g')))
 
+block_diff=$(( $chain_height - $node_height ))
+
 cat << EOF
 {
   "updated":"$(date --utc +%FT%TZ)",
@@ -43,9 +45,10 @@ cat << EOF
   "node_height":"$node_height",
   "peers":"$peers",
   "chain_rpc":"$chain_rpc",
-  "chain_height":"$chain_height"
-  "kv_rpc":"$kv_rpc"
-  "kv_result":"$kv_result"
+  "chain_height":"$chain_height",
+  "block_diff":"$block_diff",
+  "kv_rpc":"$kv_rpc",
+  "kv_result":"$kv_result",
   "kv_version":"$kv_version"
 }
 EOF
@@ -59,7 +62,7 @@ then
   --header "Content-Type: text/plain; charset=utf-8" \
   --header "Accept: application/json" \
   --data-binary "
-    report,machine=$MACHINE,id=$id,grp=$grp,owner=$OWNER status=\"$status\",peers=\"$peers\",message=\"$message\",kv_version=\"$kv_version\",chain_rpc=\"$chain_rpc\",node_version=\"$node_version\",node_rpc=\"$node_rpc\",kv_rpc=\"$kv_rpc\",chain=\"$chain\",chain_height=\"$chain_height\",node_height=\"$node_height\",kv_result=\"$kv_result\" $(date +%s%N) 
+    report,machine=$MACHINE,id=$id,grp=$grp,owner=$OWNER status=\"$status\",peers=\"$peers\",message=\"$message\",kv_version=\"$kv_version\",chain_rpc=\"$chain_rpc\",node_version=\"$node_version\",node_rpc=\"$node_rpc\",kv_rpc=\"$kv_rpc\",chain=\"$chain\",chain_height=\"$chain_height\",node_height=\"$node_height\",kv_result=\"$kv_result\",block_diff=\"$block_diff\" $(date +%s%N) 
     "
 fi
 
