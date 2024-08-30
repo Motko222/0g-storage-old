@@ -8,6 +8,7 @@ grp=storage
 network=testnet
 chain=newton
 id=$ID
+owner=$OWNER
 
 #get folder size
 folder_size=$(du -hs -L ~/0g-storage-node | awk '{print $1}')
