@@ -21,9 +21,9 @@ kv_rpc=$(cat ~/0g-storage-kv/run/config.toml | grep '^rpc_listen_address =' | ta
 #get storage node info
 cd ~/0g-storage-node/target/release
 node_version=$(./zgs_node --version | awk '{print $2}')
-json=$(curl -sX POST $node_rpc -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"zgs_getStatus","params":[],"id":1}')
-node_height=$(echo $json | jq -r .result.logSyncHeight)
-peers=$(echo $json | jq -r .result.connectedPeers)
+json1=$(curl -sX POST $node_rpc -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"zgs_getStatus","params":[],"id":1}')
+node_height=$(echo $json1 | jq -r .result.logSyncHeight)
+peers=$(echo $json1 | jq -r .result.connectedPeers)
 
 #get kv info
 kv_result=$(curl -sX POST $kv_rpc -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"kv_getStatus","params":[],"id":1}'  | jq .result)
