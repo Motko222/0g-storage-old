@@ -1,14 +1,14 @@
 #!/bin/bash
 
-source ~/scripts/0g-chain/cfg
+path=$(cd -- $(dirname -- "${BASH_SOURCE[0]}") && pwd)
+folder=$(echo $path | awk -F/ '{print $NF}')
+json=~/logs/report-$folder
 source ~/.bash_profile
+source ~/scripts/0g-chain/cfg
 
 #generic
-grp=storage
 network=testnet
 chain=newton
-id=$ID
-owner=$OWNER
 
 #get folder size
 folder_size=$(du -hs -L ~/0g-storage-node | awk '{print $1}')
@@ -54,16 +54,30 @@ cat << EOF
 }
 EOF
 
-# send data to influxdb
-if [ ! -z $INFLUX_HOST ]
-then
- curl --request POST \
- "$INFLUX_HOST/api/v2/write?org=$INFLUX_ORG&bucket=$INFLUX_BUCKET&precision=ns" \
-  --header "Authorization: Token $INFLUX_TOKEN" \
-  --header "Content-Type: text/plain; charset=utf-8" \
-  --header "Accept: application/json" \
-  --data-binary "
-    report,machine=$MACHINE,id=$id,grp=$grp,owner=$OWNER status=\"$status\",peers=\"$peers\",message=\"$message\",kv_version=\"$kv_version\",chain_rpc=\"$chain_rpc\",node_version=\"$node_version\",node_rpc=\"$node_rpc\",kv_rpc=\"$kv_rpc\",chain=\"$chain\",chain_height=\"$chain_height\",node_height=\"$node_height\",kv_result=\"$kv_result\",block_diff=\"$block_diff\" $(date +%s%N) 
-    "
-fi
+cat >$json << EOF
+{
+  "updated":"$(date --utc +%FT%TZ)",
+  "measurement":"report",
+  "tags": {
+     "id":"$folder",
+     "machine":"$MACHINE",
+     "grp":"storage",
+     "owner":"$OWNER"
+  },
+  "fields": {
+    "folder_size":"$folder_size",
+    "node_rpc":"$node_rpc",
+    "node_version":"$node_version",
+    "node_height":"$node_height",
+    "peers":"$peers",
+    "chain_rpc":"$chain_rpc",
+    "chain_height":"$chain_height",
+    "block_diff":"$block_diff",
+    "kv_rpc":"$kv_rpc",
+    "kv_result":"$kv_result",
+    "kv_version":"$kv_version"
+  }
+}
+EOF
 
+cat $json
