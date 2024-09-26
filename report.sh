@@ -35,31 +35,12 @@ chain_height=$((16#$(curl -s -X POST $chain_rpc  -H "Content-Type: application/j
 
 block_diff=$(( $chain_height - $node_height ))
 
-cat << EOF
-{
-  "updated":"$(date --utc +%FT%TZ)",
-  "id":"$ID",
-  "machine":"$MACHINE",
-  "folder_size":"$folder_size",
-  "node_rpc":"$node_rpc",
-  "node_version":"$node_version",
-  "node_height":"$node_height",
-  "peers":"$peers",
-  "chain_rpc":"$chain_rpc",
-  "chain_height":"$chain_height",
-  "block_diff":"$block_diff",
-  "kv_rpc":"$kv_rpc",
-  "kv_result":"$kv_result",
-  "kv_version":"$kv_version"
-}
-EOF
-
 cat >$json << EOF
 {
   "updated":"$(date --utc +%FT%TZ)",
   "measurement":"report",
   "tags": {
-     "id":"$folder",
+     "id":"$ID",
      "machine":"$MACHINE",
      "grp":"storage",
      "owner":"$OWNER"
