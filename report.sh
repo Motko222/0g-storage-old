@@ -35,6 +35,8 @@ chain_height=$((16#$(curl -s -X POST $chain_rpc  -H "Content-Type: application/j
 
 block_diff=$(( $chain_height - $node_height ))
 announce=$(cat ~/0g-storage-node/run/log/zgs* | grep -a "file announcement addr" | tail -1 | awk -F "addr=" '{print $NF}')
+listen=$(cat ~/0g-storage-node/run/log/zgs* | grep -a "Listening established address=" | tail -1 | awk -F "address=" '{print $NF}')
+
 
 cat >$json << EOF
 {
@@ -53,6 +55,7 @@ cat >$json << EOF
     "node_height":"$node_height",
     "peers":"$peers",
     "announce":$announce,
+    "listen":$listen,
     "chain_rpc":"$chain_rpc",
     "chain_height":"$chain_height",
     "block_diff":"$block_diff",
