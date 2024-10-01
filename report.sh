@@ -34,7 +34,7 @@ kv_version=$(./zgs_kv --version | awk '{print $2}')
 chain_height=$((16#$(curl -s -X POST $chain_rpc  -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r  .result | sed 's/0x//g')))
 
 block_diff=$(( $chain_height - $node_height ))
-peer-id=$(cat ~/0g-storage-node/run/log/zgs* | grep -a "Libp2p Starting" | tail -1 | awk -F "peer_id=" '{print $NF}' | awk '{print $1}')
+peer_id=$(cat ~/0g-storage-node/run/log/zgs* | grep -a "Libp2p Starting" | tail -1 | awk -F "peer_id=" '{print $NF}' | awk '{print $1}')
 
 cat >$json << EOF
 {
@@ -52,7 +52,7 @@ cat >$json << EOF
     "node_version":"$node_version",
     "node_height":"$node_height",
     "peers":"$peers",
-    "peer-id":"$peer-id",
+    "peer-id":"$peer_id",
     "chain_rpc":"$chain_rpc",
     "chain_height":"$chain_height",
     "block_diff":"$block_diff",
