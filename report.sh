@@ -34,7 +34,7 @@ kv_version=$(./zgs_kv --version | awk '{print $2}')
 chain_height=$((16#$(curl -s -X POST $chain_rpc  -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r  .result | sed 's/0x//g')))
 
 block_diff=$(( $chain_height - $node_height ))
-announce=$(cat ~/0g-storage-node/run/log/zgs* | grep -a "file announcement addr" | tail -1 | awk -F "addr=" '{print $NF}' | sed 's/\"//g")
+announce=$(cat ~/0g-storage-node/run/log/zgs* | grep -a "file announcement addr" | tail -1 | awk -F "addr=" '{print $NF}' | sed 's/\"//g')
 listen=$(cat ~/0g-storage-node/run/log/zgs* | grep -a "Listening established address=" | tail -1 | awk -F "address=" '{print $NF}')
 
 
