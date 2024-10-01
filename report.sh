@@ -55,7 +55,7 @@ cat >$json << EOF
     "node_height":"$node_height",
     "peers":"$peers",
     "announce":$announce,
-    "listen":$listen,
+    "listen":"$listen",
     "chain_rpc":"$chain_rpc",
     "chain_height":"$chain_height",
     "block_diff":"$block_diff",
