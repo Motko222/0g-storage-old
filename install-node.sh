@@ -25,4 +25,5 @@ cp ~/backup/0g-storage-node/log_config ~/0g-storage-node/run/log_config
 
 #start
 sudo systemctl restart 0g-storage
+sleep 20s
 tail -n 100 -f $(find ~/0g-storage-node/run/log -type f -exec ls -t1 {} + | head -1)
