@@ -2,7 +2,9 @@
 
 #update
 sudo apt-get update
-sudo apt-get install clang cmake build-essential
+sudo apt-get install clang cmake build-essential pkg-config libssl-dev
+
+#install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 #install go
