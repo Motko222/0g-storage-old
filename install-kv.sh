@@ -19,3 +19,6 @@ cargo build --release
 #restore config files
 cp ~/backup/0g-storage-kv/config.toml ~/0g-storage-kv/run/config.toml
 cp ~/backup/0g-storage-kv/log_config ~/0g-storage-kv/run/log_config
+
+#save version
+echo $tag >/root/logs/da-node-version
