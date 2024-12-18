@@ -28,7 +28,7 @@ peers=$(echo $json1 | jq -r .result.connectedPeers)
 #get kv info
 kv_result=$(curl -sX POST $kv_rpc -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"kv_getStatus","params":[],"id":1}'  | jq .result)
 cd ~/0g-storage-kv/target/release
-kv_version=$(./zgs_kv --version | awk '{print $2}')
+kv_version=$(cat /root/logs/kv-node-version)
 
 #get chain info
 chain_height=$((16#$(curl -s -X POST $chain_rpc  -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r  .result | sed 's/0x//g')))
