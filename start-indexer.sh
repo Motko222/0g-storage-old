@@ -7,8 +7,8 @@ folder=$(echo $(cd $path | awk -F/ '{print $NF}'))
 cd $path
 storage=$(cat indexer)
 
-#stop
-kill -9 $(ps aux | grep -v grep | grep indexer | awk '{print $2}')
+#stop indexer
+kill -9 $(ps aux | grep -v grep | grep "0g-storage-client indexer" | awk '{print $2}')
 
 #start indexer
 cd /root/0g-storage-client
