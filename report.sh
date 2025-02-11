@@ -25,6 +25,10 @@ json1=$(curl -sX POST $node_rpc -H "Content-Type: application/json" -d '{"jsonrp
 node_height=$(echo $json1 | jq -r .result.logSyncHeight)
 peers=$(echo $json1 | jq -r .result.connectedPeers)
 
+#get indexer info
+indexer_running=$(ps aux | grep -c indexer)
+indexer_list=$(ps aux | grep indexer | awk -F "--trusted" '{print $NF}')
+
 #get kv info
 kv_result=$(curl -sX POST $kv_rpc -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"kv_getStatus","params":[],"id":1}'  | jq .result)
 cd ~/0g-storage-kv/target/release
@@ -61,7 +65,9 @@ cat >$json << EOF
     "block_diff":"$block_diff",
     "kv_rpc":"$kv_rpc",
     "kv_result":"$kv_result",
-    "kv_version":"$kv_version"
+    "kv_version":"$kv_version",
+    "indexer_running":"$indexer_running",
+    "indexer_list":"$indexer_list"
   }
 }
 EOF
