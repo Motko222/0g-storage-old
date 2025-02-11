@@ -26,7 +26,7 @@ node_height=$(echo $json1 | jq -r .result.logSyncHeight)
 peers=$(echo $json1 | jq -r .result.connectedPeers)
 
 #get indexer info
-indexer_running=$(ps aux | grep -c indexer)
+indexer_running=$(ps aux | grep -v grep | grep -c "0g-storage-client indexer")
 indexer_list=$(ps aux | grep -v grep | grep "0g-storage-client indexer" | awk -F "--trusted" '{print $NF}')
 
 #get kv info
