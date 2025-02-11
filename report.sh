@@ -27,7 +27,7 @@ peers=$(echo $json1 | jq -r .result.connectedPeers)
 
 #get indexer info
 indexer_running=$(ps aux | grep -c indexer)
-indexer_list=$(ps aux | grep indexer | awk -F "--trusted" '{print $NF}')
+indexer_list=$(ps aux | grep -v grep | grep "0g-storage-client indexer" | awk -F "--trusted" '{print $NF}')
 
 #get kv info
 kv_result=$(curl -sX POST $kv_rpc -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"kv_getStatus","params":[],"id":1}'  | jq .result)
