@@ -5,7 +5,7 @@ cd $path
 storage=$(cat indexer)
 
 #stop
-kill -9 indexer
+pkill -9 indexer
 
 #start indexer
 cd /root/0g-storage-client
