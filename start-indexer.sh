@@ -1,5 +1,8 @@
 #!/bin/bash
 
+path=$(cd -- $(dirname -- "${BASH_SOURCE[0]}") && pwd)
+folder=$(echo $(cd $path | awk -F/ '{print $NF}'))
+
 #read storage servers from indexer setup file
 cd $path
 storage=$(cat indexer)
