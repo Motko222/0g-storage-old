@@ -2,7 +2,7 @@
 
 #read storage servers from indexer setup file
 cd $path
-$storage=xxx
+storage=$(cat indexer)
 
 #start indexer
 cd /root/0g-storage-client
