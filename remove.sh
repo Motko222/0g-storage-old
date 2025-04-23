@@ -25,6 +25,7 @@ rm -r /root/0g-storage-kv
 
 #backup scripts
 rm -r /root/scripts/0g-storage/.git
+rm -r /root/scripts/backup/0g-storage
 mv -f /root/scripts/$folder /root/backup/scripts
 
 #remove influx data
