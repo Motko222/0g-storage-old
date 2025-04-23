@@ -20,7 +20,7 @@ mv -f /root/0g-storage-node/run/config.toml /root/backup/0g-storage-node
 mv -f /root/0g-storage-node/run/log_config /root/backup/0g-storage-node
 rm -r /root/0g-storage-node
 mkdir /root/backup/0g-storage-kv
-mf -f /root/0g-storage-kv/run/config.toml /root/backup/0g-storage-kv
+mv -f /root/0g-storage-kv/run/config.toml /root/backup/0g-storage-kv
 rm -r /root/0g-storage-kv
 
 #backup scripts
