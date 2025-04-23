@@ -26,3 +26,7 @@ rm -r /root/0g-storage-kv
 #backup scripts
 rm -r /root/scripts/0g-storage/.git
 mv -f /root/scripts/$folder /root/backup/scripts
+
+#remove influx data
+#source /root/0g-chain/cfg
+#echo $ID | bash /root/scripts/system/influx-delete-id.sh
